@@ -20,6 +20,7 @@ from utils.allowed_urls import UrlsWithPermissionsView
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('clients/', include(('clients.urls', 'clients'), namespace='clients')),
+    path('dishes/', include(('dishes.urls', 'dishes'), namespace='dishes')),
     path('inventory/', include(('inventory.urls', 'inventory'), namespace='inventory')),
     path('student/', include(('student.urls', 'student'), namespace='student')),
     path('instance/named/url/list/allowed/', UrlsWithPermissionsView.as_view(), name='allowed-urls'),
