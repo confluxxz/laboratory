@@ -6,7 +6,7 @@ class Dishes(Model):
     quantity = IntegerField(default=0, verbose_name='Количество')
     place = CharField(max_length=500, default="", verbose_name="Место хранения")
     last_update_date = DateTimeField(auto_now=True, verbose_name='Дата последнего изменения')
-
+#изменение
 
     class Meta:
         verbose_name = 'Посуда'
