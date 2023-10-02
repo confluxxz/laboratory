@@ -76,7 +76,7 @@ class ClientSystem(Model):
     password = CharField(max_length=16, default=get_secret, blank=True, unique=True, verbose_name='Секретный токен')
     is_student = BooleanField(default=True, verbose_name='Студент')
     is_teacher = BooleanField(default=False, verbose_name='Преподаватель')
-
+    is_assistant = BooleanField(default=False, verbose_name='Лаборант')
     last_login = DateTimeField(null=True, blank=True)
     last_use = DateTimeField(null=True, blank=True)
     # ToDo: Удалить все deprecated методы

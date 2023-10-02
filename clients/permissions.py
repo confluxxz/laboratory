@@ -101,3 +101,33 @@ class IsStudentPermission(BasePermission):
             bool: флаг доступа
         """
         return self.has_permission(request, view)
+class IsAssistantPermission(BasePermission):
+    """Класс прав, проверяющий отправлен ли запрос от имени авторизованной клиентской системы.
+    """
+
+    def has_permission(self, request, view):
+        """Проверка прав доступа к обработчику не связанному с объектом, проверяется авторизация клиентской системы.
+
+        Args:
+            request (Request): Объект запроса
+            view (View): Объект обработчика запроса
+
+        Returns:
+            bool: флаг доступа
+        """
+        if hasattr(request.user, 'is_assistant') and request.user.is_assistant:
+            return True
+        return False
+
+    def has_object_permission(self, request, view, obj):
+        """Проверка прав доступа к обработчику связанному с объектом, проверяется авторизация клиентской системы.
+
+        Args:
+            request (Request): Объект запроса
+            view (View): Объект обработчика запроса
+            obj: объект, с которым работает обработчик
+
+        Returns:
+            bool: флаг доступа
+        """
+        return self.has_permission(request, view)

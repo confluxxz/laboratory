@@ -126,13 +126,11 @@ class ClientSystemUser:
         return self._client.is_student
 
     @property
-    def is_active(self):
-        """Вычисляемое свойство активности, по умолчанию объект активен.
-        """
-        return True
+    def is_assistant(self):
+        return self._client.is_assistant
 
     @property
-    def is_system(self):
-        """Вычисляемое свойство показывающее принадлежность к внешним системам, по умолчанию объект внешняя система.
+    def is_active(self):
+        """Вычисляемое свойство активности, по умолчанию объект активен.
         """
         return True

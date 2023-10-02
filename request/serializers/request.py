@@ -1,7 +1,7 @@
 from rest_framework.serializers import ModelSerializer
-from ..models import Dishes
+from ..models import Request
 
-class BaseDishesSerializer(ModelSerializer):
+class BaseRequestSerializer(ModelSerializer):
     class Meta:
-        model = Dishes
+        model = Request
         fields = '__all__'
