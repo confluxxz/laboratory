@@ -8,4 +8,5 @@ request_router.register(prefix='request', viewset=RequestModelViewSet, basename=
 
 urlpatterns = [
     path('', include(request_router.urls)),
+    path('requests/<int:request_id>/', include(request_router.urls)),
 ]

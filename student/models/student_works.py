@@ -1,4 +1,4 @@
-from django.db.models import Model, ForeignKey, DateField, BooleanField
+from django.db.models import Model, ForeignKey, DateField, BooleanField, FloatField
 from django.db.models.deletion import CASCADE
 from clients.models import ClientSystem
 from inventory.models import Work, WorkReagents
@@ -34,6 +34,7 @@ class StudentWorkReagents(Model):
     student_work = ForeignKey(to=StudentWork, on_delete=CASCADE, related_name='reagents', verbose_name='Работа')
     reagent = ForeignKey(to=WorkReagents, on_delete=CASCADE, verbose_name='Реагент')
     taken = BooleanField(default=False)
+    real_quantity = FloatField(null=True, blank=True, verbose_name='Фактически взято')
 
     class Meta:
         verbose_name = 'Реактивы студента'
@@ -43,9 +44,17 @@ class StudentWorkReagents(Model):
         return "{} {}".format(self.student_work, self.reagent.reagent.name)
 
     def take(self):
-        if not self.taken and self.reagent.reagent.check_quantity(self.reagent.quantity, self.reagent.get_units_display()):
-            self.taken = True
-            self.reagent.reagent.minus(self.reagent.quantity, self.reagent.get_units_display())
-            self.save()
+        if self.real_quantity is None:
+            if not self.taken and self.reagent.reagent.check_quantity(self.reagent.quantity, self.reagent.get_units_display()):
+                self.taken = True
+                self.reagent.reagent.minus(self.reagent.quantity, self.reagent.get_units_display())
+                self.save()
+                return True
+            return False
+        else:
+            if not self.taken and self.reagent.reagent.check_quantity(self.real_quantity, self.reagent.get_units_display()):
+                self.taken = True
+                self.reagent.reagent.minus(self.real_quantity, self.reagent.get_units_display())
+                self.save()
             return True
         return False

@@ -34,7 +34,13 @@ class Reagents(Model):
         new_quantity = self.quantity * ureg[self.get_units_display()] + quantity * ureg[units]
         self.quantity = new_quantity.m
         self.save()
-
+"""
+    def statistics(self, quantity, units):
+        ureg = UnitRegistry()
+        new_quantity = self.quantity * ureg[self.get_units_display()] + quantity * ureg[units]
+        self.quantity = new_quantity.m
+        self.save()
+"""
 
 class WorkReagents(Model):
     reagent = ForeignKey(to=Reagents, on_delete=CASCADE, related_name='work_reagents')

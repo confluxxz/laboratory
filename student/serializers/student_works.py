@@ -1,11 +1,10 @@
-from rest_framework.serializers import ModelSerializer, SerializerMethodField, CharField, IntegerField
+from rest_framework.serializers import ModelSerializer, SerializerMethodField, CharField, IntegerField, DateField
 from rest_framework.exceptions import ValidationError
 from ..models.student_works import StudentWork, StudentWorkReagents
 from inventory.serializers.works import BaseWorkSerializer
 
 
 class ReagentBaseSerializer(ModelSerializer):
-
     reagent = CharField(source='reagent.reagent.name')
     units = CharField(source='reagent.get_units_display')
     quantity = IntegerField(source='reagent.quantity')
@@ -16,13 +15,13 @@ class ReagentBaseSerializer(ModelSerializer):
 
 
 class BaseStudentWorkSerializer(ModelSerializer):
-
     work = BaseWorkSerializer()
     student = SerializerMethodField()
     reagents = ReagentBaseSerializer(
         many=True,
         source="reagents.all"
     )
+
 
     class Meta:
         model = StudentWork
@@ -37,7 +36,6 @@ class BaseStudentWorkSerializer(ModelSerializer):
 
 
 class CreateStudentWorkSerializer(ModelSerializer):
-
     class Meta:
         model = StudentWork
         fields = '__all__'
@@ -53,7 +51,6 @@ class CreateStudentWorkSerializer(ModelSerializer):
 
 
 class BaseStudentByStudentWorkSerializer(ModelSerializer):
-
     work = BaseWorkSerializer()
     reagents = ReagentBaseSerializer(
         many=True,
@@ -65,3 +62,9 @@ class BaseStudentByStudentWorkSerializer(ModelSerializer):
         exclude = ("student", "date")
 
 
+class ApprovedWorkSerializer(ModelSerializer):
+        work = BaseWorkSerializer()
+        student = SerializerMethodField()
+        class Meta:
+            model = StudentWork
+            fields = '__all__'

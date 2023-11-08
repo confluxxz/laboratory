@@ -1,4 +1,4 @@
-from django.db.models import Model, ForeignKey, IntegerField, TextField, CharField, BooleanField
+from django.db.models import Model, ForeignKey, TextField, CharField, BooleanField
 from django.db.models.deletion import CASCADE
 from .research import Research
 from inventory.models.works import Work
@@ -10,7 +10,7 @@ class WorkRequest(Model):
     student = ForeignKey(to=ClientSystem, on_delete=CASCADE, related_name='student', verbose_name='Студент')
     accept_person = ForeignKey(to=ClientSystem, on_delete=CASCADE, default=None, blank=True, null=True, related_name='accept_persons', verbose_name='Согласующий')
     research = ForeignKey(to=Research, on_delete=CASCADE, related_name='dishes', verbose_name='Исследование')
-    is_approved = BooleanField(default=False)
+    is_approved = BooleanField(default=False, blank=True)
     work = ForeignKey(to=Work, on_delete=CASCADE, related_name='work', verbose_name='Эксперимент', default=None, blank=True, null=True)
     class Meta:
         verbose_name = 'Запрос студента на эксперимент'

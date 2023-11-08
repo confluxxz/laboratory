@@ -77,6 +77,26 @@ class ReagentsModelViewSet(
         )
         return Response(status=status.HTTP_200_OK)
 
+    @action(methods=['POST'], detail=True, url_path='statistics')
+    def statistics(self, request, *args, **kwargs):
+        reagents = self.get_object()
+        if not (request.data.get('quantity') and request.data.get('units')):
+            return Response(
+                data={'detail': 'Не передано количество или единицы измерения'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        units = next(filter(lambda d: d[0] == request.data.get('units'), UnitsType.choices), None)
+        if units is None:
+            return Response(
+                data={'detail': 'Несуществующие единицы измерения'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        reagents.statistics(
+            request.data.get('quantity'),
+            units[1]
+        )
+        return Response(status=status.HTTP_200_OK)
+
 
 class WorkReagentsModelViewSet(
     ModelViewSet,
