@@ -18,32 +18,20 @@ class WorkRequestTeacherModelViewSet(
     ]
     pagination_class = SelectorPagination
 
-
-class WorkRequestStudentModelViewSet(
-    ModelViewSet
-):
-    queryset = WorkRequest.objects.all()
-    serializer_class = BaseWorkRequestStudentSerializer
-    serializers_class = {
-        ACTIONS.CREATE: BaseWorkRequestStudentSerializer,
-    }
-    permission_classes = [
-        IsStudentPermission
-    ]
-    pagination_class = SelectorPagination
-
-class WorkRequestTeacherApprovedModelViewSet(
-    ModelViewSet
-):
-    queryset = WorkRequest.objects.all()
-    serializer_class = BaseWorkRequestApprovedSerializer
-    permission_classes = [
-        IsTeacherPermission
-    ]
-    pagination_class = SelectorPagination
-
     @action(methods=['POST'], detail=True, url_path='take')
     def take(self, request, *args, **kwargs):
+        """
+        object = self.get_object()
+        serializer = Твой сериалайзер
+        instance=object
+        data = {'is_approved': True}
+        serializer.is_valid()
+        serializer.save(serializer.validated_data)
+        return Response(
+            status=status.HTTP_200_OK,
+            data=serializer.data
+        )
+        """
         if not self.is_approved == True:
             return Response(
                 data={
@@ -54,3 +42,17 @@ class WorkRequestTeacherApprovedModelViewSet(
         return Response(
             status=status.HTTP_200_OK
         )
+
+
+class WorkRequestStudentModelViewSet(
+    ModelViewSet
+):
+    queryset = WorkRequest.objects.all()
+    serializer_class = BaseWorkRequestStudentSerializer
+    serializers_class = {
+        ACTIONS.POST: BaseWorkRequestStudentSerializer,
+    }
+    permission_classes = [
+        IsStudentPermission
+    ]
+    pagination_class = SelectorPagination

@@ -12,10 +12,11 @@ class BaseWorkRequestTeacherSerializer(ModelSerializer):
 
 class BaseWorkRequestStudentSerializer(ModelSerializer):
 
+    is_approved = serializers.BooleanField(read_only=True)
     class Meta:
         model = WorkRequest
         exclude = ("work")
-        is_approved = serializers.BooleanField(is_approved=False)
+        # is_approved = serializers.BooleanField(is_approved=False)
     def validate(self, attrs):
         if not attrs.get('student').is_student:
             raise ValidationError(
