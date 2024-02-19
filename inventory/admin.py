@@ -1,6 +1,6 @@
 from django.contrib.admin import site, ModelAdmin
 
-from .models import ExtraFields, Reagents, WorkReagents, Work, Result, Value, DryMethod
+from .models import ExtraFields, Reagents, WorkReagents, Work, Result, Value, DryMethod, Equipment
 
 
 class ReagentsModelAdmin(ModelAdmin):
@@ -30,6 +30,9 @@ class ValueModelAdmin(ModelAdmin):
 class DryMethodModelAdmin(ModelAdmin):
     pass
 
+class EquipmentModelAdmin(ModelAdmin):
+    pass
+
 
 site.register(Reagents, ReagentsModelAdmin)
 site.register(WorkReagents, WorkReagentsModelAdmin)
@@ -38,4 +41,6 @@ site.register(Result, ResultModelAdmin)
 site.register(ExtraFields, ExtraFieldModelAdmin)
 site.register(Value, ValueModelAdmin)
 site.register(DryMethod, DryMethodModelAdmin)
+site.register(Equipment, EquipmentModelAdmin)
+
 

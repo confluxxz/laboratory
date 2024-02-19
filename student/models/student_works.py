@@ -7,14 +7,14 @@ from inventory.models import Work, WorkReagents
 class StudentWork(Model):
     student = ForeignKey(to=ClientSystem, on_delete=CASCADE, related_name='student_works', verbose_name='Студент')
     work = ForeignKey(to=Work, on_delete=CASCADE, related_name='students', verbose_name='Работа')
-    date = DateField()
+    date = DateField(null=True, blank=True)
 
     class Meta:
         verbose_name = 'Лабораторная работа студента'
         verbose_name_plural = 'Лабораторные работы студента'
 
     def __str__(self):
-        return "{} ({}) {}".format(self.work.name, self.student, self.date.strftime('%d.%m.%y'))
+        return "{} ({}) {}".format(self.work.name, self.student, self.date.strftime('%d.%m.%y') if self.date else "Без даты")
 
     def save(
         self, force_insert=False, force_update=False, using=None, update_fields=None

@@ -63,8 +63,12 @@ class BaseStudentByStudentWorkSerializer(ModelSerializer):
 
 
 class ApprovedWorkSerializer(ModelSerializer):
-        work = BaseWorkSerializer()
-        student = SerializerMethodField()
         class Meta:
             model = StudentWork
-            fields = '__all__'
+            fields = ('date',)
+            extra_kwargs = {
+                'date': {
+                    'required':True,
+                    'allow_null':False
+                }
+            }

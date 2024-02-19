@@ -74,7 +74,7 @@ class TodayStudentWorksModelViewSet(
 
 
 class LaboratoryDateWorksModelViewSet(
-    ModelViewSet
+    ReadOnlyModelViewSet
 ):
     queryset = StudentWork.objects.all()
     serializer_class = ApprovedWorkSerializer
@@ -82,3 +82,17 @@ class LaboratoryDateWorksModelViewSet(
         IsAssistantPermission
     ]
     pagination_class = SelectorPagination
+
+    @action(methods=['POST'], detail=True, url_path='approve/date')
+    def approve_date(self, request, *args, **kwargs):
+        object = self.get_object()
+        serializer = ApprovedWorkSerializer(
+            instance = object,
+            data = request.data
+        )
+        serializer.is_valid()
+        serializer.update(serializer.instance, serializer.validated_data)
+        return Response(
+            status=status.HTTP_200_OK,
+            data=serializer.data
+        )

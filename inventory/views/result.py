@@ -9,5 +9,5 @@ class ResultModelViewSet (
 ):
     queryset = Result.objects.all()
     serializer_class = BaseResultSerializer
-    permission_classes = IsTeacherPermission
+    permission_classes = [IsTeacherPermission]
     pagination_class = SelectorPagination

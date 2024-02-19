@@ -25,6 +25,7 @@ urlpatterns = [
     path('student/', include(('student.urls', 'student'), namespace='student')),
     path('instance/named/url/list/allowed/', UrlsWithPermissionsView.as_view(), name='allowed-urls'),
     path('research/', include(('research.urls', 'research'), namespace='research')),
-    path('requests/', include(('request.urls', 'request'), namespace='request'))
+    path('requests/', include(('request.urls', 'request'), namespace='request')),
+    path('equipments/', include(('request.urls', 'request'), namespace='request'))
 
 ]

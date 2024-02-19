@@ -1,7 +1,7 @@
 from django.urls import path, include
 from rest_framework.routers import SimpleRouter
 from .views.reagents import ReagentsModelViewSet, WorkReagentsModelViewSet, UnitsTypeView
-from .views.works import WorksModelViewSet
+from .views.works import WorksModelViewSet, WorkStudentModelViewSet, WorkTeacherModelViewSet
 from .views.equipment import EquipmentModelViewSet
 from .views.result import ResultModelViewSet
 from .views.extra_fields import ExtraFieldsModelViewSet
@@ -31,6 +31,13 @@ value_extra_field_router.register(prefix='value', viewset=ValueModelViewSet, bas
 dry_method_router = SimpleRouter()
 dry_method_router.register(prefix='dry_method', viewset=EquipmentDryMethodModelViewSet, basename='dry_method')
 
+
+student_router = SimpleRouter()
+student_router.register(prefix='work', viewset=WorkStudentModelViewSet, basename='student|works')
+
+teacher_router = SimpleRouter()
+teacher_router.register(prefix='work', viewset=WorkTeacherModelViewSet, basename='teacher|works')
+
 urlpatterns = [
     path('', include(inventory_router.urls)),
     path('works/<int:work_id>/', include(work_reagents_router.urls)),
@@ -39,5 +46,7 @@ urlpatterns = [
     path('', include(result_router.urls)),
     path('', include(extra_field_router.urls)),
     path('', include(value_extra_field_router.urls)),
-    path('', include(dry_method_router.urls))
+    path('', include(dry_method_router.urls)),
+    path('student/', include(student_router.urls)),
+    path('teacher/', include(teacher_router.urls))
 ]
