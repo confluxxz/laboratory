@@ -4,7 +4,7 @@ from .models import ExtraFields, Reagents, WorkReagents, Work, Result, Value, Dr
 
 
 class ReagentsModelAdmin(ModelAdmin):
-    pass
+    search_fields = ['name', 'place']
 
 
 class WorkReagentsModelAdmin(ModelAdmin):
@@ -31,7 +31,7 @@ class DryMethodModelAdmin(ModelAdmin):
     pass
 
 class EquipmentModelAdmin(ModelAdmin):
-    pass
+    search_fields = ['name', 'place']
 
 
 site.register(Reagents, ReagentsModelAdmin)

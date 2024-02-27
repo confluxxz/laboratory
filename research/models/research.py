@@ -13,4 +13,5 @@ class Research(Model):
         verbose_name_plural = 'Исследование студента'
 
     def __str__(self):
-        return "{}".format(self.name)
+        return (f"{self.name}. "
+                f"Студент: {self.student}")

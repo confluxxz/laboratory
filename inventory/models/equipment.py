@@ -13,5 +13,7 @@ class Equipment(Model):
         verbose_name = 'Оборудование эксперимента'
         verbose_name_plural = 'Оборудование эксперимента'
 
-    def __str__(self):
-        return self.name
+    def __str__(self, *args, **kwargs):
+        return (f"{self.name}. "
+                f"Ответственный: {self.laboratory_assistant}. "
+                f"Место: {self.place}")

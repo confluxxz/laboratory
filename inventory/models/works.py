@@ -17,4 +17,6 @@ class Work(Model):
         verbose_name_plural = 'Лабораторные работы'
 
     def __str__(self):
-        return "{} {}{}".format(self.name, self.student, self.is_approved, self.accept_person)
+        return (f"{self.name}. "
+                f"Студент: {self.student}. "
+                f"Одобрено: {self.is_approved}")

@@ -17,7 +17,8 @@ class Reagents(Model):
         verbose_name_plural = 'Реагенты'
 
     def __str__(self):
-        return self.name
+        return (f"{self.name}."
+                f"Количество: {self.quantity}{self.units}")
 
     def check_quantity(self, quantity, units):
         ureg = UnitRegistry()
