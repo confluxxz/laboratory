@@ -1,1 +1,4 @@
-from .dishes import BaseDishesSerializer
+from .dishes import (BaseDishesSerializer,
+                     DishesListModelSerializer,
+                     DishesCreateModelSerializer,
+                     DishesDetailModelSerializer)
