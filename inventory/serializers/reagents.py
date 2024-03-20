@@ -11,6 +11,16 @@ class BaseReagentsSerializer(ModelSerializer):
         fields = '__all__'
 
 
+class ListReagentsSerializer(BaseReagentsSerializer):
+
+    full_name = SerializerMethodField()
+
+    class Meta(BaseReagentsSerializer.Meta):
+        fields = ['id', 'full_name']
+
+    def get_full_name(self, obj):
+        return str(obj)
+
 class UpdateReagentsSerializer(ModelSerializer):
 
     class Meta:

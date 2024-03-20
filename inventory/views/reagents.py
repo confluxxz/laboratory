@@ -9,10 +9,12 @@ from rest_framework.response import Response
 from rest_framework.permissions import AllowAny
 from ..models.reagents import Reagents, WorkReagents
 from ..models.choices import UnitsType
-from ..serializers.reagents import BaseReagentsSerializer, \
-    UpdateReagentsSerializer, \
-    BaseWorkReagentsSerializer, \
-    CreateWorkReagentsSerializer
+from ..serializers.reagents import (BaseReagentsSerializer,
+                                    UpdateReagentsSerializer,
+                                    BaseWorkReagentsSerializer,
+                                    ListReagentsSerializer,
+                                    CreateWorkReagentsSerializer,
+                                    )
 
 
 class ReagentsModelViewSet(
@@ -27,7 +29,7 @@ class ReagentsModelViewSet(
     queryset = Reagents.objects.all()
     serializer_class = BaseReagentsSerializer
     serializers_class = {
-        ACTIONS.LIST: BaseReagentsSerializer,
+        ACTIONS.LIST: ListReagentsSerializer,
         ACTIONS.RETRIEVE: BaseReagentsSerializer,
         ACTIONS.POST: BaseReagentsSerializer,
         ACTIONS.PUT: UpdateReagentsSerializer
