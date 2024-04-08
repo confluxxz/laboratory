@@ -6,7 +6,7 @@ from .views.student_works import TeacherStudentWorksModelViewSet, \
 base_router = SimpleRouter()
 base_router.register(prefix='teacher/works', viewset=TeacherStudentWorksModelViewSet, basename='teacher|works')
 base_router.register(prefix='works', viewset=TodayStudentWorksModelViewSet, basename='student|works')
-base_router.register(prefix='works|approved', viewset=LaboratoryDateWorksModelViewSet, basename='student|works|approved')
+base_router.register(prefix='works/approved', viewset=LaboratoryDateWorksModelViewSet, basename='student|works|approved')
 # inventory_router.register(prefix='works', viewset=WorksModelViewSet, basename='works')
 
 # work_reagents_router = SimpleRouter()

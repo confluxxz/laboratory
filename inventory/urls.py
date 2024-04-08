@@ -48,5 +48,6 @@ urlpatterns = [
     path('', include(value_extra_field_router.urls)),
     path('', include(dry_method_router.urls)),
     path('student/', include(student_router.urls)),
-    path('teacher/', include(teacher_router.urls))
+    path('teacher/', include(teacher_router.urls)),
+
 ]

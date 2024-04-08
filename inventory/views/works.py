@@ -32,6 +32,7 @@ class WorkTeacherModelViewSet(
     serializer_class = BaseWorkSerializer
     serializers_class = {
         ACTIONS.POST: BaseWorkSerializer,
+
     }
     permission_classes = [
         IsTeacherPermission
@@ -52,18 +53,6 @@ class WorkTeacherModelViewSet(
             data=serializer.data
         )
 
-        """
-        if not self.is_approved == True:
-            return Response(
-                data={
-                    "detail": "Эксперимент не одобрен",
-                },
-                status=status.HTTP_400_BAD_REQUEST
-            )
-        return Response(
-            status=status.HTTP_200_OK
-        )
-        """
 
 
 class WorkStudentModelViewSet(

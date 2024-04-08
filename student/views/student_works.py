@@ -31,18 +31,24 @@ class TeacherStudentWorksModelViewSet(
 
 
 class TodayStudentWorksModelViewSet(
-    ReadOnlyModelViewSet
+    ReadOnlyModelViewSet #readonlyviewset (узнать у андрея нужно ли создавать работки студенту)
 ):
     queryset = StudentWork.objects.all()
     serializer_class = BaseStudentByStudentWorkSerializer
     permission_classes = [
         IsStudentPermission
     ]
+    serializers_class = {
+        ACTIONS.LIST: BaseStudentWorkSerializer,
+        ACTIONS.RETRIEVE: BaseStudentWorkSerializer,
+        ACTIONS.POST: CreateStudentWorkSerializer,
+        ACTIONS.PUT: CreateStudentWorkSerializer
+    }
 
     def get_queryset(self):
         return super().get_queryset().filter(
             student=self.request.user.client,
-            date=timezone.now().date()
+            # todo чтоб студент видел только сегодняшние работы (спросить как лучше)
         )
 
     @action(methods=['POST'], detail=True, url_path='take')
@@ -90,7 +96,7 @@ class LaboratoryDateWorksModelViewSet(
             instance = object,
             data = request.data
         )
-        serializer.is_valid()
+        serializer.is_valid(raise_exception=True)
         serializer.update(serializer.instance, serializer.validated_data)
         return Response(
             status=status.HTTP_200_OK,
