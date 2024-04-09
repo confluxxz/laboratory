@@ -49,8 +49,7 @@ INSTALLED_APPS = [
     'student',
     'dishes',
     'research',
-    'request',
-    'corsheaders'
+    'request'
 ]
 
 MIDDLEWARE = [
@@ -62,11 +61,9 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
-    'clients.middleware.ClientSystemAuthMiddleware',
-    'corsheaders.middleware.CorsMiddleware'
+    'clients.middleware.ClientSystemAuthMiddleware'
 ]
 
-CORS_ORIGIN_ALLOW_ALL = True
 
 ROOT_URLCONF = 'mysite.urls'
 
